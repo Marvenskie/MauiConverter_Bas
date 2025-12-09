@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:vm="clr-namespace:MauiConverter_Bas.ViewModel"
+             xmlns:model="clr-namespace:MauiConverter_Bas.Model"
+             x:Class="MauiConverter_Bas.ConversionPage"
+             Title="ConversionPage">
+    <ContentPage.BindingContext>
+        <vm:projViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Spacing="0">
+
+        <VerticalStackLayout BackgroundColor="#320E60"
+                             Padding="0, 40, 0, 10">
+            <Label Text="- MAUIVERTER -"
+                   TextColor="White"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+
+        <CollectionView ItemsSource="{Binding Categories}"
+                        VerticalOptions="FillAndExpand"
+                        Margin="1, 0, 1, 0">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="3" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:projModel">
+
+                    <Grid HeightRequest="130">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:projViewModel}}, Path=NavigateToConversionCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout BackgroundColor="{Binding BackgroundColor}"
+                                             Spacing="5"
+                                             Padding="5"
+                                             HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="FillAndExpand">
+
+                            <Label Text="{Binding Icon}"
+                                   FontFamily="FontAwesomeSolid"
+                                   TextColor="White"
+                                   FontSize="48"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="Center" />
+
+                            <Label Text="{Binding Name}"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalOptions="End"
+                                   Padding="0, 0, 0, 10" />
+
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

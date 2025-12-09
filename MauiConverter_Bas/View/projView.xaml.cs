@@ -4,6 +4,6 @@ public partial class projView : ContentPage
 {
 	public projView()
 	{
-		InitializeComponent();
+		
 	}
 }
